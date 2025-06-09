@@ -16,7 +16,7 @@ I decided to go with an architecture that I'm familiar with: a main Finite State
 2. A `HardwareManager` class acting as a hardware abstraction interface. Most of the functions just mock reading and writing to the PLC input/outputs and sending/receiving CAN messages. In a real application, this class would likely be a lot larger and the CAN functionality may be split into its own class.
 3. A `ControlManager` class that outputs a PID signal. In a real application, this class would wrap a battle-tested PID library. In this example, it just outputs mock control signals.
 
-![Finite State Machine Diagram](./fsm.excalidraw.png)
+![Finite State Machine Diagram](./fsm.png)
 
 The tests are all contained in the `tests/main.cpp`, and only cover a few things: entering the ignition state and making sure ignition can't happen when the supply voltage or coolant levels aren't correct. In a real application, there would be many more tests split into their own folders, but for this example everything is contained in the mainf file.
 
