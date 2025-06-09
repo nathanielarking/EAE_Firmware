@@ -10,13 +10,15 @@ This is the repository containing my submission for the firmware section of the 
 6. Unit tests with GoogleTests. I used [this template](https://dev.to/yanujz/getting-started-with-googletest-and-cmake-1kgg) for setting up the dependency.
 7. Shell scripts for building & launching with runtime parameters.
 
-I decided to go with an architecture that I'm familiar with: that being a main Finite State Machine class that runs all main application routine logic, and a number of Manager classes which are each responsible for their own utilities. Aside from the main file, there are three classes:
+I decided to go with an architecture that I'm familiar with: a main Finite State Machine class runs all main application routine logic, and a number of Manager classes which are each responsible for their own utilities. Aside from the main file, there are three classes:
 
 1. The `StateManager` class for FSM. It implements a simple state machine, pictured below.
 2. A `HardwareManager` class acting as a hardware abstraction interface. Most of the functions just mock reading and writing to the PLC input/outputs and sending/receiving CAN messages. In a real application, this class would likely be a lot larger and the CAN functionality may be split into its own class.
 3. A `ControlManager` class that outputs a PID signal. In a real application, this class would wrap a battle-tested PID library. In this example, it just outputs mock control signals.
 
 ![Finite State Machine Diagram](./fsm.excalidraw.png)
+
+The tests are all contained in the `tests/main.cpp`, and only cover a few things: entering the ignition state and making sure ignition can't happen when the supply voltage or coolant levels aren't correct. In a real application, there would be many more tests split into their own folders, but for this example everything is contained in the mainf file.
 
 ## Improvements
 
